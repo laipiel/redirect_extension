@@ -1,2 +1,3 @@
 - Improve the UIs.
 - Use google appspot instead of localStorage to store the URLs.
+- Add functions to validate URLs.
