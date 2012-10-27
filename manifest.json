@@ -1,0 +1,13 @@
+{
+  "name": "Enola",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "This extension will redirect blocked URLs to other URLs.",
+  "content_scripts": [
+    {
+      "matches": ["http://www.yahoo.com/*"],
+      "js": [ "redirect.js" ],
+      "run_at": "document_start"
+    }
+  ]
+}
