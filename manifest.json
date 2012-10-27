@@ -3,11 +3,15 @@
   "version": "1.0",
   "manifest_version": 2,
   "description": "This extension will redirect blocked URLs to other URLs.",
+  "background": {
+    "page": "bg.html"
+  },
   "content_scripts": [
     {
-      "matches": ["http://www.yahoo.com/*"],
+      "matches": ["http://*/*"],
       "js": [ "redirect.js" ],
       "run_at": "document_start"
     }
-  ]
+  ],
+  "options_page": "options.html"
 }
