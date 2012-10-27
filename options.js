@@ -1,11 +1,8 @@
 var options = {};
 
-options.urls;
+options.urls = {};
 
 options.populateUrls = function() {
-  if (!options.urls) {
-    return;
-  }
   if (options.urls['blockedUrls']) {
     var blockedUrlsTextArea = document.getElementById('blockedUrls');
     blockedUrlsTextArea.value = options.urls['blockedUrls'].join('\n');
