@@ -1,9 +1,21 @@
 <html>
   <head>
     <title>Enola options</title>
-    <script src="options.js"></script>
+    <script type='text/javascript' src='options.js'></script>
   </head>
   <body>
-    This is the enola option page.
+    <p>
+      This extension will redirect to one of the redirect urls
+      you listed here when you try to go to any of the blocked urls.
+    </p>
+    <p>
+      <div>Blocked Urls (Enter one url per line):</div>
+      <textarea id='blockedUrls' rows=4 cols=50></textarea>
+    </p>
+    <p>
+      <div>Redirect Urls (Enter one url per line):</div>
+      <textarea id='redirectUrls' rows=4 cols=50></textarea>
+    </p>
+    <div><button id='save'>Save</button></div>
   </body>
 </html>
