@@ -2,6 +2,9 @@ var options = {};
 
 options.urls = {};
 
+options.synced = false;
+options.loaded = false;
+
 options.populateUrls = function() {
   if (options.urls['blockedUrls']) {
     var blockedUrlsTextArea = document.getElementById('blockedUrls');
@@ -18,21 +21,32 @@ options.saveUrls = function() {
   options.urls['blockedUrls'] = blockedUrlsTextArea.value.split('\n');
   var redirectUrlsTextArea = document.getElementById('redirectUrls');
   options.urls['redirectUrls'] = redirectUrlsTextArea.value.split('\n');
-  localStorage.setItem('enola', JSON.stringify(options.urls));
+  chrome.storage.sync.clear();
+  chrome.storage.sync.set({'enola': options.urls});
 };
 
 options.init = function() {
-  options.populateUrls();
-  var saveButton = document.getElementById('save');
-  saveButton.addEventListener('click', options.saveUrls, false);
+  if (options.synced && options.loaded) {
+    options.populateUrls();
+    var saveButton = document.getElementById('save');
+    saveButton.addEventListener('click', options.saveUrls, false);
+  }
+};
+
+options.load = function() {
+  options.loaded = true;
+  options.init();
+};
+
+options.sync = function(urls) {
+  options.urls = urls['enola'];
+  options.synced = true;
+  options.init();
 };
 
 options.run = function() {
-  var urls = localStorage.getItem('enola');
-  if (urls) {
-    options.urls = JSON.parse(urls);
-  }
-  window.addEventListener('load', options.init, false);
-}
+  chrome.storage.sync.get('enola', options.sync);
+  window.addEventListener('load', options.load, false);
+};
 
 options.run();

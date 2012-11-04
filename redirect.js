@@ -1,5 +1,5 @@
-var redirect = function(urls) {
-  window.console.log(urls);
+chrome.storage.sync.get('enola', function(items) {
+  var urls = items['enola'];
   var redirected = false;
   var blockedUrls = urls['blockedUrls'];
   for (var i = 0, blockedUrl; blockedUrl = blockedUrls[i++];) {
@@ -14,8 +14,4 @@ var redirect = function(urls) {
     var index = Math.floor(Math.random() * redirectUrls.length);
     window.location.href = redirectUrls[index];
   }
-};
-
-chrome.extension.sendMessage({}, function(response) {
-  redirect(JSON.parse(response.urls));
 });
