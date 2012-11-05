@@ -39,7 +39,7 @@ options.load = function() {
 };
 
 options.sync = function(urls) {
-  options.urls = urls['enola'];
+  options.urls = urls['enola'] ? urls['enola'] : {};
   options.synced = true;
   options.init();
 };
